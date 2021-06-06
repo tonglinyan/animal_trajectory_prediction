@@ -1,6 +1,7 @@
+import box
 import numpy as np
 import pandas as pd
-
+import math
 
 def import_data(name_file, name_ref):
     x = pd.read_csv(name_file)
@@ -26,7 +27,7 @@ zebra = pd.concat([zebra, zebra_data.iloc[:,8]], axis=1)
 zebra_long_min = int(min(zebra.iloc[:,1]))
 zebra_long_max = math.ceil(max(zebra.iloc[:,1]))
 zebra_lat_min = int(min(zebra.iloc[:,2]))
-zebra_lat_max = math.ceil(zebra.iloc[:,2]))
+zebra_lat_max = math.ceil(max(zebra.iloc[:,2]))
 
 
 zebra_h = 0.1
@@ -34,11 +35,7 @@ nb_long_interval = (zebra_long_max - zebra_long_min)/zebra_h
 nb_lat_interval = (zebra_lat_max - zebra_lat_min)/zebra_h
 
 
-for i in range(nb_long_interval-1):
-    for j in range(nb_lat_interval-1):
-        df2 = zebra[(zebra['location-long'] >= zebra_long_min + i * zebra_h) 
-        & (zebra['location-long'] < zebra_long_min + (i+1) * zebra_h)
-        & (zebra['location-lat'] >= zebra_lat_min + i * zebra_h) 
-        & (zebra['location-lat'] < zebra_lat_min + (i+1) * zebra_h)]
-        
-
+df2 = zebra[(zebra['location-long'] >= 23.5) & (zebra['location-long'] < 23.6) 
+& (zebra['location-lat'] >= -19.4) & (zebra['location-lat'] < -19.3)]
+box1 = box.Box(df2, 23.5, -19.4)
+box1.training_data
