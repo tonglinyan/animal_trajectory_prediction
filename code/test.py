@@ -4,8 +4,8 @@ import pandas as pd
 import math
 
 def import_data(name_file, name_ref):
-    x = pd.read_csv(name_file)
-    ref = pd.read_csv(name_ref)
+    x = pd.read_csv(name_file, low_memory=False)
+    ref = pd.read_csv(name_ref, low_memory=False)
     x = pd.DataFrame(x)
     ref = pd.DataFrame(ref)
     n, p = x.shape
@@ -34,8 +34,6 @@ zebra_h = 0.1
 nb_long_interval = (zebra_long_max - zebra_long_min)/zebra_h
 nb_lat_interval = (zebra_lat_max - zebra_lat_min)/zebra_h
 
-
-df2 = zebra[(zebra['location-long'] >= 23.5) & (zebra['location-long'] < 23.6) 
-& (zebra['location-lat'] >= -19.4) & (zebra['location-lat'] < -19.3)]
-box1 = box.Box(df2, 23.5, -19.4)
-box1.training_data
+df2 = zebra[(zebra['location-long'] >= 23.8) & (zebra['location-long'] < 23.9) & (zebra['location-lat'] >= -19.6) & (zebra['location-lat'] < -19.5)][['timestamp','tag-local-identifier']]
+#print(df2)
+ox1 = box.Box(23.7, -19.5, df2)

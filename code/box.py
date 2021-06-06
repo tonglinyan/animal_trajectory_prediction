@@ -1,3 +1,6 @@
+import pandas as pd
+import math
+
 class Box:
     x = 0
     y = 0
@@ -11,14 +14,17 @@ class Box:
         self.x = x
         self.y = y
         self.time_series = time
-        self.n, p = time_series.shape
-        for i in range(n):
-            self.time_series[i, 1] = self.time_series[i, 1][0:10]
-        self.time_series = self.time_series.drop_duplicates()
-        self.n, p = self.time_series
-        self.n_training = int(n * 0.75)
-        self.training_data = self.time_series[0:n_training]
-        self.testing_data = self.time_series[n_training:n]
+        self.n, p = self.time_series.shape
+        for i in range(self.n):
+            self.time_series.iloc[i, 0] = self.time_series.iloc[i, 0][0:10]
+        self.time_series = self.time_series.drop_duplicates(['timestamp', 'tag-local-identifier'], 'first')
+        self.n, p = self.time_series.shape
+        self.n_training = math.ceil(self.n * 0.75)
+        self.training_data = self.time_series[0:self.n_training]
+        self.testing_data = self.time_series[self.n_training:self.n]
+        print(self.training_data)
+        print(self.testing_data)
+
 
     def getX(self):
         return self.x
