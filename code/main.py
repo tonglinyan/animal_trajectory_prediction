@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 import math
 import box
 
@@ -10,9 +11,7 @@ def import_data(name_file, name_ref):
     x = pd.DataFrame(x)
     #print(x.info())
     ref = pd.DataFrame(ref)
-    x = x.drop(x[x['visible'] == 'FALSE'].index)
-    n, p = x.shape
-    return x, ref, n
+    return x, ref
 
 
 def missing_data(data):
@@ -22,38 +21,43 @@ def missing_data(data):
 
 
 def pre_processing(data, n):
-
-    col = pd.DataFrame(columns=['label'], index=[range (n)])
-    data = pd.concat((data, col), axis = 1)
+    lab = np.zeros((n, 1))
+    
     for i in range(n):
         # longitude
         x = int(data.iloc[i, 1])
         # latitude
         y = math.ceil(data.iloc[i, 2]) 
-        data.iloc[i, 4] = label(x, y)
+        lab[i, 0] = label(x, y)
         data.iloc[i, 0] = data.iloc[i, 0][0:10]
-        print(i)
+    
+    col = pd.DataFrame(lab, columns=['label'])
+    print(col.shape)
+    data = pd.concat((data, col), axis = 1)
+
     data = data.drop_duplicates(['timestamp', 'tag-local-identifier'], 'first')
+    data.info()
     print(data)
     return data
 
 
 def label(x, y):
-    return (90 - y)*360 + (x-180)
+    return int((90 - y)*360 + (x-180))
 
 
-whale_data, whale_ref, whale_n = import_data(
+whale_data, whale_ref = import_data(
     "../dataset/large marine fauna/blue whales/Blue whales Eastern North Pacific 1993-2008 - Argos Data.csv", 
     "../dataset/large marine fauna/blue whales/Blue whales Eastern North Pacific 1993-2008 - Argos Data-reference-data.csv")
 
-zebra_data, zebra_ref, zebra_n = import_data(
+zebra_data, zebra_ref= import_data(
     "../dataset/land predator/zebra/Migratory Burchell's zebra (Equus burchellii) in northern Botswana.csv",
     "../dataset/land predator/zebra/Migratory Burchell's zebra (Equus burchellii) in northern Botswana-reference data.csv")
 
-
-zebra = zebra_data.iloc[:,2:5]
-zebra = pd.concat([zebra, zebra_data.iloc[:,8]], axis=1)
+zebra_data.info()
+zebra = zebra_data[zebra_data['visible']][['timestamp', 'location-long', 'location-lat', 'tag-local-identifier']]
+zebra.info()
 zebra = missing_data(zebra)
+zebra_n, p = zebra.shape
 
 """
 zebra_long_min = int(min(zebra.iloc[:,1]))
@@ -78,4 +82,15 @@ for i in range(int(nb_long_interval)-1):
 #zebra.info()
 #print(zebra.isnull())
 pre_processing(zebra, zebra_n)
-        
+
+
+fig = plt.figure(dpi=128, figsize=(10,6))
+plt.scatter(zebra['location-long'], zebra['location-lat'], c='red')
+#设置图形的格式
+plt.title("location", fontsize=24)
+plt.xlabel('longtitude',fontsize=16)
+plt.ylabel("latitude", fontsize=16)
+plt.tick_params(axis='both', which="major", labelsize=16)
+ 
+plt.show()
+   
