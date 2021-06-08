@@ -26,10 +26,10 @@ class Box:
         print(self.testing_data)
 
 
-    def getX(self):
+    def get_x(self):
         return self.x
 
-    def getY(self):
+    def get_y(self):
         return self.y
     
     
