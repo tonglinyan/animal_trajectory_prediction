@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 from matplotlib import gridspec
 from IPython.core.pylabtools import figsize
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+from pandas import Series
+from matplotlib import pyplot
+from pandas.plotting import autocorrelation_plot, lag_plot
 import seaborn as sns
 
 def ts_plot(data, i):
@@ -27,4 +30,16 @@ def correlation(data):
     plt.subplots(figsize=(9, 9))
     sns.heatmap(a, annot=True, vmax=1, square=True, cmap="Blues")
     plt.savefig('../figures/zebra/correlation.png')
+    plt.show()
+
+
+def lag_plot(data):
+    for i in range (0,400, 50):
+        pd.plotting.lag_plot(data, lag = i)
+        pyplot.show()
+
+
+def autocorrelation(data, label): 
+    autocorrelation_plot(data)
+    plt.savefig('../figures/zebra/autoorrelation_%s.png'%label)
     plt.show()

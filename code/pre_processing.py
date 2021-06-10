@@ -46,7 +46,7 @@ def label(x, y):
 
 
 def point_plot(data):
-    fig = plt.figure(dpi=128, figsize=(10,6))
+    #fig = plt.figure(dpi=128, figsize=(10,6))
     plt.axhline(y=-20,ls="-",c="green")
     plt.axhline(y=-19,ls="-",c="green")
     plt.axhline(y=-21,ls="-",c="green")
@@ -88,15 +88,22 @@ def box_time_series(data, date, ind):
 
 
 def plot_colored(df):
-    zebra1 = df.iloc[1:203] #id=3864
-    zebra2 = df.iloc[204:478] #id=3743
-    zebra3 = df.iloc[479:749] #id=3866
-    zebra4 = df.iloc[750:1070] #id=6402
-    zebra5 = df.iloc[1071:1287] #id=6405
-    zebra6 = df.iloc[1288:1551] #id=6407
-    zebra7 = df.iloc[1552:1793] #id=6399
+    #id=3864
+    zebra1 = df.iloc[1:203] 
+    #id=3743
+    zebra2 = df.iloc[204:478] 
+    #id=3866
+    zebra3 = df.iloc[479:749] 
+    #id=6402
+    zebra4 = df.iloc[750:1070] 
+    #id=6405
+    zebra5 = df.iloc[1071:1287] 
+    #id=6407
+    zebra6 = df.iloc[1288:1551]
+    #id=6399 
+    zebra7 = df.iloc[1552:1793] 
 
-    fig = plt.figure(dpi=300, figsize=(10,6))
+    #fig = plt.figure(dpi=300, figsize=(10,6))
 
     plt.axhline(y=-20,ls="-",c="black")
     plt.axhline(y=-19,ls="-",c="black")
@@ -105,18 +112,18 @@ def plot_colored(df):
     plt.axvline(x=24,ls="-",c="black")
     plt.axvline(x=25,ls="-",c="black")
     plt.axvline(x=26,ls="-",c="black")
-    plt.plot(zebra1['location-long'], zebra1['location-lat'], 'o', markersize = 3, c='firebrick')
-    plt.plot(zebra2['location-long'], zebra2['location-lat'], 'o', markersize = 3, c='gold')
-    plt.plot(zebra3['location-long'], zebra3['location-lat'], 'o', markersize = 3, c='greenyellow')
-    plt.plot(zebra4['location-long'], zebra4['location-lat'], 'o', markersize = 3, c='dodgerblue')
-    plt.plot(zebra5['location-long'], zebra5['location-lat'], 'o', markersize = 3, c='royalblue')
-    plt.plot(zebra6['location-long'], zebra6['location-lat'], 'o', markersize = 3, c='gray')
-    plt.plot(zebra7['location-long'], zebra7['location-lat'], 'o', markersize = 3, c='orange')
+    plt.plot(zebra1['location-long'], zebra1['location-lat'], 'o', markersize = 3, c='firebrick',label='3864')
+    plt.plot(zebra2['location-long'], zebra2['location-lat'], 'o', markersize = 3, c='gold',label='3743')
+    plt.plot(zebra3['location-long'], zebra3['location-lat'], 'o', markersize = 3, c='greenyellow',label='3866')
+    plt.plot(zebra4['location-long'], zebra4['location-lat'], 'o', markersize = 3, c='dodgerblue',label='6402')
+    plt.plot(zebra5['location-long'], zebra5['location-lat'], 'o', markersize = 3, c='royalblue',label='6405')
+    plt.plot(zebra6['location-long'], zebra6['location-lat'], 'o', markersize = 3, c='gray',label='6407')
+    plt.plot(zebra7['location-long'], zebra7['location-lat'], 'o', markersize = 3, c='orange',label='6399')
 
     plt.title('location', fontsize=24)
     plt.xlabel('longtitude',fontsize=16)
     plt.ylabel('latitude', fontsize=16)
     plt.tick_params(axis='both', which="major", labelsize=16)
-    
+    plt.legend(loc='upper right')
     plt.savefig('../figures/zebra/point.png')
     plt.show()

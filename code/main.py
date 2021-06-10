@@ -23,7 +23,7 @@ from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 #zebra.to_csv(r'../dataset/land predator/zebra/after_processing.csv', index = False)
 
 zebra = pd.read_csv('../dataset/land predator/zebra/after_processing.csv')
-pp.plot_colored(zebra) 
+#pp.plot_colored(zebra) 
 
 col = pp.labels(zebra)
 #date_list = pp.get_date_list('2007-10-25', '2009-06-01')
@@ -45,5 +45,8 @@ date_list = pd.read_csv('../dataset/land predator/zebra/date_list.csv', index_co
 #for i in range(len(col)):
 #    cor.ts_plot(date_list.iloc[:,i], col[i])
 
-cor.correlation(date_list)
+#cor.correlation(date_list)
+for i in range(len(col)):
+    #cor.lag_plot(date_list.iloc[:, i])
+    cor.autocorrelation(date_list.iloc[:, i], col[i])
    
