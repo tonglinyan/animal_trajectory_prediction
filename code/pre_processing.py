@@ -2,13 +2,11 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import math
+import brewer2mpl
 
 def import_data(name_file):
     x = pd.read_csv(name_file)
-    #ref = pd.read_csv(name_ref)
     x = pd.DataFrame(x)
-    #print(x.info())
-    #ref = pd.DataFrame(ref)
     return x
 
 
@@ -46,7 +44,7 @@ def label(x, y):
 
 
 def point_plot(data):
-    #fig = plt.figure(dpi=128, figsize=(10,6))
+    fig = plt.figure(dpi=128, figsize=(10,6))
     plt.axhline(y=-20,ls="-",c="green")
     plt.axhline(y=-19,ls="-",c="green")
     plt.axhline(y=-21,ls="-",c="green")
@@ -87,50 +85,39 @@ def box_time_series(data, date, ind):
     return date
 
 
-def point_zebra(df):
-    #id=3864
-    zebra1 = df.iloc[1:203] 
-    #id=3743
-    zebra2 = df.iloc[204:478] 
-    #id=3866
-    zebra3 = df.iloc[479:749] 
-    #id=6402
-    zebra4 = df.iloc[750:1070] 
-    #id=6405
-    zebra5 = df.iloc[1071:1287] 
-    #id=6407
-    zebra6 = df.iloc[1288:1551]
-    #id=6399 
-    zebra7 = df.iloc[1552:1793] 
+def scatter_plot(data, path):
+    
+    id = np.unique(data['tag-local-identifier'])
+    nb = len(id)
+    
+    max = data[['location-long','location-lat']].max(axis=0)
+    min = data[['location-long','location-lat']].min(axis=0)
+    
+    max_long = math.ceil(max[0])
+    max_lat = math.ceil(max[1])
+    min_long = math.floor(min[0])
+    min_lat = math.floor(min[1])
+    
+    #print(max_long, max_lat, min_long, min_lat)
+    color = ['firebrick', 'black', 'blue', 'greenyellow', 'gold', 'grey', 'orange', 'violet', 'green', 'pink', 'dodgerblue', 'blueviolet', 'red', 'yellow', 'slategrey']
+    
+    #color = brewer2mpl.get_map('RdYlGn', 'diverging', nb).mpl_colors
+    fig = plt.figure(dpi=128, figsize=(10,6))
+    
+    for i in range (nb):
+        animal = data[data['tag-local-identifier'] == id[i]]
+        plt.plot(animal['location-long'], animal['location-lat'], 'o', markersize = 3, color = color[i], label = id[i])
 
-    #fig = plt.figure(dpi=300, figsize=(10,6))
-
-    plt.axhline(y=-20,ls="-",c="black")
-    plt.axhline(y=-19,ls="-",c="black")
-    plt.axhline(y=-21,ls="-",c="black")
-    plt.axvline(x=23,ls="-",c="black")
-    plt.axvline(x=24,ls="-",c="black")
-    plt.axvline(x=25,ls="-",c="black")
-    plt.axvline(x=26,ls="-",c="black")
-
-    plt.plot(zebra1['location-long'], zebra1['location-lat'], 'o', markersize = 3, c='firebrick',label='3864')
-    plt.plot(zebra2['location-long'], zebra2['location-lat'], 'o', markersize = 3, c='gold',label='3743')
-    plt.plot(zebra3['location-long'], zebra3['location-lat'], 'o', markersize = 3, c='greenyellow',label='3866')
-    plt.plot(zebra4['location-long'], zebra4['location-lat'], 'o', markersize = 3, c='dodgerblue',label='6402')
-    plt.plot(zebra5['location-long'], zebra5['location-lat'], 'o', markersize = 3, c='royalblue',label='6405')
-    plt.plot(zebra6['location-long'], zebra6['location-lat'], 'o', markersize = 3, c='gray',label='6407')
-    plt.plot(zebra7['location-long'], zebra7['location-lat'], 'o', markersize = 3, c='orange',label='6399')
-
+    for j in range (min_lat,max_lat+1) :
+        plt.axhline(y = j, ls = "--", c = "black", lw = 0.3)
+                            
+    for k in range (min_long, max_long+1) :
+        plt.axvline(x = k, ls = "--", c = "black", lw = 0.3)
+        
     plt.title('location', fontsize=24)
     plt.xlabel('longtitude',fontsize=16)
     plt.ylabel('latitude', fontsize=16)
     plt.tick_params(axis='both', which="major", labelsize=16)
-    plt.legend(loc='upper right')
-    plt.savefig('../figures/zebra/point.png')
+    plt.legend(loc='best')
+    plt.savefig(path)
     plt.show()
-
-
-def point_gull(data):
-    
-
-def point_elephant(data):

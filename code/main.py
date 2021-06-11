@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import math
 import pre_processing as pp
 import correlation as cor
-from matplotlib import gridspec
-from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+#from matplotlib import gridspec
+#from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 
 #whale_data = pp.import_data(
 #    "../dataset/large marine fauna/blue whales/Blue whales Eastern North Pacific 1993-2008 - Argos Data.csv")
@@ -31,13 +31,13 @@ from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 #elephant_data = pp.import_data(
 #    '../dataset/land predator/elephant/African elephants in Etosha National Park (data from Tsalyuk et al. 2018).csv')
 #data = elephant_data[['timestamp', 'location-long', 'location-lat', 'tag-local-identifier']]
-#name = 'land predator/elephant'
+name = 'land predator/elephant'
 
 
 # turtle
 #turtle_data = pp.import_data('../dataset/large marine fauna/turtles/Satellite Tracking of Oceanic Loggerhead Turtles in the Mediterranean.csv')
 #data = turtle_data[['timestamp', 'location-long', 'location-lat', 'tag-local-identifier']]
-name = 'large marine fauna/turtles'
+#name = 'large marine fauna/turtles'
 
 #data = pp.missing_data(data)
 #n, p = data.shape
@@ -47,18 +47,7 @@ name = 'large marine fauna/turtles'
 
 data = pd.read_csv('../dataset/%s/after_processing.csv'%name)
 
-## zebra
-#pp.point_zebra(data) 
-
-## gull
-#pp.point_gull(data) 
-
-## elephant
-#pp.point_elephant(data) 
-
-## turtle 
-#pp.point_elephant(data) 
-
+pp.scatter_plot(data, '../figures/%s/point.png'%name) 
 
 col = pp.labels(data)
 
@@ -69,10 +58,10 @@ col = pp.labels(data)
 #date_list = pp.get_date_list('2008-02-12', '2013-09-12')
 
 ## elephant
-#date_list = pp.get_date_list('2008-10-31', '2014-03-27')
+date_list = pp.get_date_list('2008-10-31', '2014-03-27')
 
 # turtle
-date_list = pp.get_date_list('2016-10-13', '2018-11-01')
+#date_list = pp.get_date_list('2016-10-13', '2018-11-01')
 
 n1 = len(col)
 n2, p2 = date_list.shape
@@ -82,19 +71,19 @@ date_list = pd.concat([date_list, arr], axis = 1)
 
 n, p = data.shape
 
-for i in range(1, len(col)+1):
-    date_list = pp.box_time_series(data[data['label'] == col[i-1]], date_list, i)
+#for i in range(1, len(col)+1):
+#    date_list = pp.box_time_series(data[data['label'] == col[i-1]], date_list, i)
 
 
-date_list.to_csv(r'../dataset/%s/date_list.csv'%name, index = False)
-date_list = pd.read_csv('../dataset/%s/date_list.csv'%name, index_col = 0)
+#date_list.to_csv(r'../dataset/%s/date_list.csv'%name, index = False)
+#date_list = pd.read_csv('../dataset/%s/date_list.csv'%name, index_col = 0)
 
 
-cor.correlation(date_list, '../figures/%s/correlation.png'%name)
-for i in range(len(col)):
-    cor.ts_plot(date_list.iloc[:,i], '../figures/%s/acf_pacf_%i.png' % (name, col[i]))
-    ##cor.lag_plot(date_list.iloc[:, i])
-    cor.autocorrelation(date_list.iloc[:, i], '../figures/%s/autocorrelation_%i.png' % (name, col[i]))
+#cor.correlation(date_list, '../figures/%s/correlation.png'%name)
+#for i in range(len(col)):
+#    cor.ts_plot(date_list.iloc[:,i], '../figures/%s/acf_pacf_%i.png' % (name, col[i]))
+#    #cor.lag_plot(date_list.iloc[:, i])
+#    cor.autocorrelation(date_list.iloc[:, i], '../figures/%s/autocorrelation_%i.png' % (name, col[i]))
 
     
    
