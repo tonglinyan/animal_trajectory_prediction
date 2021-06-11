@@ -32,9 +32,13 @@ from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 #data = elephant_data[['timestamp', 'location-long', 'location-lat', 'tag-local-identifier']]
 
 
-#data = pp.missing_data(data)
-#n, p = data.shape
-#data, labels = pp.pre_processing(data, n)
+# turtle
+turtle_data = pp.import_data('../dataset/large marine fauna/turtles/Satellite Tracking of Oceanic Loggerhead Turtles in the Mediterranean.csv')
+data = turtle_data[['timestamp', 'location-long', 'location-lat', 'tag-local-identifier']]
+
+data = pp.missing_data(data)
+n, p = data.shape
+data, labels = pp.pre_processing(data, n)
 
 #data.to_csv(r'../dataset/land predator/zebra/after_processing.csv', index = False)
 
@@ -42,19 +46,23 @@ from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 
 #data.to_csv(r'../dataset/land predator/elephant/after_processing.csv', index = False)
 
+data.to_csv(r'../dataset/large marine fauna/turtles/after_processing.csv', index = False)
+print(data)
+
 ## zebra
 #data = pd.read_csv('../dataset/land predator/zebra/after_processing.csv')
 #pp.point_zebra(data) 
 
 
 ## gull
-data = pd.read_csv('../dataset/bird/herring gulls/after_processing.csv')
-pp.point_gull(data) 
+#data = pd.read_csv('../dataset/bird/herring gulls/after_processing.csv')
+#pp.point_gull(data) 
 
 
 ## elephant
 data = pd.read_csv('../dataset/land predator/elephant/after_processing.csv')
-pp.point_elephant(data) 
+print(data)
+#pp.point_elephant(data) 
 
 
 #col = pp.labels(data)
