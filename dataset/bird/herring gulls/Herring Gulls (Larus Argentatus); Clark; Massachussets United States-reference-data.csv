@@ -1,0 +1,10 @@
+tag-id,animal-id,animal-taxon,deploy-on-date,deploy-off-date,attachment-type,deploy-on-latitude,deploy-on-longitude,deployment-comments,deployment-id,duty-cycle,manipulation-type,study-site
+80150,80150,Larus argentatus,2008-02-12 14:00:00.000,,harness,42.4,-72.31,"chest harness, capture with net launcher",80150,"8 hr on, 18 hr off",none,"Quabbin Reservoir, MA"
+80149,80149,Larus argentatus,2008-03-12 21:00:00.000,,harness,42.4,-72.31,"chest harness, capture with net launcher",80149,"8 hr on, 18 hr off",none,"Quabbin Reservoir, MA"
+87431,87431,Larus argentatus,2008-09-08 15:00:00.000,,harness,42.4,-72.31,"chest harness, capture with net launcher",87431,"8 hr on, 18 hr off",none,"Quabbin Reservoir, MA"
+87433,87433,Larus argentatus,2008-11-06 15:00:00.000,,harness,42.4,-72.31,"chest harness, capture with net launcher",87433,"8 hr on, 18 hr off",none,"Quabbin Reservoir, MA"
+33073,33073,Larus argentatus,2008-11-07 14:56:00.000,,harness,42.4,-72.31,"chest harness, capture with net launcher",33073,"8 hr on, 18 hr off",none,"Quabbin Reservoir, MA"
+33071,33071,Larus argentatus,2009-01-02 21:17:00.000,,harness,42.4,-72.31,"chest harness, capture with net launcher",33071,"8 hr on, 18 hr off",none,"Quabbin Reservoir, MA"
+87434,87434,Larus argentatus,2009-01-21 18:00:00.000,,harness,42.4,-72.31,"chest harness, capture with net launcher",87434,"8 hr on, 18 hr off",none,"Quabbin Reservoir, MA"
+33067,33067,Larus argentatus,2009-01-22 19:25:00.000,,harness,42.4,-72.31,"chest harness, capture with net launcher",33067,"8 hr on, 18 hr off",none,"Quabbin Reservoir, MA"
+87432,87432,Larus argentatus,2009-01-22 21:00:00.000,,harness,42.4,-72.31,"chest harness, capture with net launcher",87432,"8 hr on, 18 hr off",none,"Quabbin Reservoir, MA"

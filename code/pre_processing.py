@@ -3,13 +3,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import math
 
-def import_data(name_file, name_ref):
+def import_data(name_file):
     x = pd.read_csv(name_file)
-    ref = pd.read_csv(name_ref)
+    #ref = pd.read_csv(name_ref)
     x = pd.DataFrame(x)
     #print(x.info())
-    ref = pd.DataFrame(ref)
-    return x, ref
+    #ref = pd.DataFrame(ref)
+    return x
 
 
 def missing_data(data):
@@ -87,7 +87,7 @@ def box_time_series(data, date, ind):
     return date
 
 
-def plot_colored(df):
+def point_zebra(df):
     #id=3864
     zebra1 = df.iloc[1:203] 
     #id=3743
@@ -112,6 +112,7 @@ def plot_colored(df):
     plt.axvline(x=24,ls="-",c="black")
     plt.axvline(x=25,ls="-",c="black")
     plt.axvline(x=26,ls="-",c="black")
+
     plt.plot(zebra1['location-long'], zebra1['location-lat'], 'o', markersize = 3, c='firebrick',label='3864')
     plt.plot(zebra2['location-long'], zebra2['location-lat'], 'o', markersize = 3, c='gold',label='3743')
     plt.plot(zebra3['location-long'], zebra3['location-lat'], 'o', markersize = 3, c='greenyellow',label='3866')
@@ -127,3 +128,9 @@ def plot_colored(df):
     plt.legend(loc='upper right')
     plt.savefig('../figures/zebra/point.png')
     plt.show()
+
+
+def point_gull(data):
+    
+
+def point_elephant(data):

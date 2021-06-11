@@ -41,5 +41,5 @@ def lag_plot(data):
 
 def autocorrelation(data, label): 
     autocorrelation_plot(data)
-    plt.savefig('../figures/zebra/autoorrelation_%s.png'%label)
+    plt.savefig('../figures/zebra/autocorrelation_%s.png'%label)
     plt.show()
