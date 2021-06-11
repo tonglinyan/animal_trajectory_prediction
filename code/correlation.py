@@ -9,7 +9,7 @@ from matplotlib import pyplot
 from pandas.plotting import autocorrelation_plot, lag_plot
 import seaborn as sns
 
-def ts_plot(data, i):
+def ts_plot(data, path):
     figsize(15,9)
     fig = plt.figure()
     gs = gridspec.GridSpec(2,2)
@@ -22,14 +22,14 @@ def ts_plot(data, i):
     plot_acf(data, ax=ax_acf, lags=50)
     plot_pacf(data, ax=ax_pacf, lags=50)
     
-    plt.savefig('../figures/zebra/acf_pacf_%i.png'%i)
+    plt.savefig(path)
     plt.show()
     
-def correlation(data):
+def correlation(data, path):
     a = data.corr()
     plt.subplots(figsize=(9, 9))
     sns.heatmap(a, annot=True, vmax=1, square=True, cmap="Blues")
-    plt.savefig('../figures/zebra/correlation.png')
+    plt.savefig(path)
     plt.show()
 
 
@@ -39,7 +39,7 @@ def lag_plot(data):
         pyplot.show()
 
 
-def autocorrelation(data, label): 
+def autocorrelation(data, path): 
     autocorrelation_plot(data)
-    plt.savefig('../figures/zebra/autocorrelation_%s.png'%label)
+    plt.savefig(path)
     plt.show()
