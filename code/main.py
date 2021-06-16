@@ -15,7 +15,7 @@ import correlation as cor
 #zebra_data = pp.import_data(
 #    "../dataset/land predator/zebra/Migratory Burchell's zebra (Equus burchellii) in northern Botswana.csv")
 #data = zebra_data[zebra_data['visible']][['timestamp', 'location-long', 'location-lat', 'tag-local-identifier']]
-#name = 'land predator/zebra'
+name = 'land predator/zebra'
 
 
 ## gulls
@@ -31,7 +31,7 @@ import correlation as cor
 #elephant_data = pp.import_data(
 #    '../dataset/land predator/elephant/African elephants in Etosha National Park (data from Tsalyuk et al. 2018).csv')
 #data = elephant_data[['timestamp', 'location-long', 'location-lat', 'tag-local-identifier']]
-name = 'land predator/elephant'
+#name = 'land predator/elephant'
 
 
 # turtle
