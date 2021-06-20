@@ -5,11 +5,19 @@ import numpy as np
 def import_data(num_colony):
     path = "../dataset/insect/ant/tracking data/ant tracking data/Colony %i/Colony_%i_low_density_locations" % (num_colony, num_colony) #文件夹目录
     files= os.listdir(path) # get all the files in the folder
+    
+    if ('.DS_Store' in files):
+        files.remove('.DS_Store')
+
     index = 0
     return_matrix = []
+
+    print(files)
+
     for file in files: # iterator for traversing all the files
         if not os.path.isdir(file): # check if it is a file  
             f = open(path+"/"+file) # open the file
+            #print(f)
             df = pd.read_table(f, sep = ',') # 
             data = df.values #
             data = pd.DataFrame(data)
@@ -45,3 +53,5 @@ data = import_data(1)
 data = pd.concat([data, import_data(2)], axis = 0)
 data = pd.concat([data, import_data(3)], axis = 0)
 print(data)
+
+data.to_csv('../dataset/insect/ant/after_processing.csv')
