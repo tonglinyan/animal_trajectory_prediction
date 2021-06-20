@@ -12,14 +12,14 @@ def import_data(num_colony):
     index = 0
     return_matrix = []
 
-    print(files)
+    #print(files)
 
     for file in files: # iterator for traversing all the files
         if not os.path.isdir(file): # check if it is a file  
             f = open(path+"/"+file) # open the file
             #print(f)
-            df = pd.read_table(f, sep = ',') # 
-            data = df.values #
+            df = pd.read_table(f, sep = ',') 
+            data = df.values
             data = pd.DataFrame(data)
 
             data.columns = ['time', 'location_x', 'location_y', 'chamber']
@@ -35,23 +35,95 @@ def import_data(num_colony):
             else:
                 return_matrix = pd.concat([return_matrix, data], axis = 0)
             index += 1
-            """
-            iter_f = iter(f); # iterator for reading
-            for line in iter_f:
-                line = line.strip('\n')
-                list_from_line = line.split(',')
-                s = s.append(list_from_line axis = 0)
-                index += 1
-            """
-    # print(return_matrix)
-    #arr = np.ones((return_matrix.shape[0],1))*num_colony
-    #arr = pd.DataFrame(arr, columns = ['colony_id'])
-    #return_matrix = pd.concat([return_matrix, arr], axis = 1)
+     
     return return_matrix
 
-data = import_data(1)
-data = pd.concat([data, import_data(2)], axis = 0)
-data = pd.concat([data, import_data(3)], axis = 0)
-print(data)
 
-data.to_csv('../dataset/insect/ant/after_processing.csv')
+def minmax(data):    
+    id = np.unique(data['chamber'])
+    min = [[0]*(len(id)-1)for _ in range (2)]
+    max = [[0]*(len(id)-1)for _ in range (2)]
+
+    ant = data[(data['chamber']!=0)]
+    for j in range (len(id)-1):
+        a = ant[ant['chamber'] == j+1]
+        max[0][j] = a['location_x'].max(axis=0)
+        max[1][j] = a['location_y'].max(axis=0)
+        min[0][j] = a['location_x'].min(axis=0)
+        min[1][j] = a['location_y'].min(axis=0)
+     
+    return min, max
+
+
+def discretization_time(data):
+
+    data = data[(data.time == 1) | (data.time % 5 == 1)]
+    data = data.reset_index(drop=True)
+
+    return data
+
+
+def location_in_mm(data):
+    df = data
+    return_matrix = []
+    min, max = minmax(data)
+
+    for i in range(4):
+        h_x = (max[0][i] - min[0][i])/60
+        h_y = (max[1][i] - min[1][i])/40
+
+        data = df[df.chamber == i+1]
+
+        x = data['location_x']
+        x = np.array(x)
+        y = data['location_y']
+        y = np.array(y)
+
+        min_x = np.ones((len(x),))*min[0][i]
+        min_y = np.ones((len(x),))*min[1][i]
+        
+        x = (x - min_x)/h_x
+        y = (y - min_y)/h_y
+
+        data['location_x'] = x
+        data['location_y'] = y
+        
+        if (i == 0):
+            return_matrix = data
+        else:
+            return_matrix = pd.concat([return_matrix, data], axis = 0)
+
+    return return_matrix
+
+def tunnel(data):
+    return data
+
+
+def discretization_location(data):
+    return data
+
+#data = import_data(1)
+#data = pd.concat([data, import_data(2)], axis = 0)
+#data = pd.concat([data, import_data(3)], axis = 0)
+#data.to_csv('../dataset/insect/ant/after_processing.csv', index = False)
+
+
+#data = pd.read_csv('../dataset/insect/ant/after_processing.csv')
+#data = discretization_time(data)
+#data.to_csv('../dataset/insect/ant/time_discretized.csv', index = False)
+
+
+#data = pd.read_csv('../dataset/insect/ant/time_discretized.csv')
+#data1 = []
+#for i in range(1, 4):
+#    df = location_in_mm(data[data.colony_id == i])
+#    if (i == 1):
+#        data1 = df
+#    else:
+#        data1 = pd.concat([data1, df], axis = 0)
+
+#data = data1.sort_index(axis = 0)
+#print(data)
+#data.to_csv('../dataset/insect/ant/location_in_mm.csv', index = False)
+
+data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
