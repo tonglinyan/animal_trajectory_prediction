@@ -82,9 +82,11 @@ def location_in_mm(data):
         min_x = np.ones((len(x),))*min[0][i]
         min_y = np.ones((len(x),))*min[1][i]
         
-        x = (x - min_x)/h_x
-        y = (y - min_y)/h_y
+        dif_y = np.ones((len(x),))*i*(40+6)
 
+        x = (x - min_x)/h_x
+        y = (y - min_y)/h_y+dif_y
+        
         data['location_x'] = x
         data['location_y'] = y
         
@@ -95,12 +97,15 @@ def location_in_mm(data):
 
     return return_matrix
 
+
+
 def tunnel(data):
     return data
 
 
 def discretization_location(data):
     return data
+
 
 #data = import_data(1)
 #data = pd.concat([data, import_data(2)], axis = 0)
@@ -113,17 +118,17 @@ def discretization_location(data):
 #data.to_csv('../dataset/insect/ant/time_discretized.csv', index = False)
 
 
-#data = pd.read_csv('../dataset/insect/ant/time_discretized.csv')
-#data1 = []
-#for i in range(1, 4):
-#    df = location_in_mm(data[data.colony_id == i])
-#    if (i == 1):
-#        data1 = df
-#    else:
-#        data1 = pd.concat([data1, df], axis = 0)
+data = pd.read_csv('../dataset/insect/ant/time_discretized.csv')
+data1 = []
+for i in range(1, 4):
+    df = location_in_mm(data[data.colony_id == i])
+    if (i == 1):
+        data1 = df
+    else:
+        data1 = pd.concat([data1, df], axis = 0)
 
-#data = data1.sort_index(axis = 0)
-#print(data)
-#data.to_csv('../dataset/insect/ant/location_in_mm.csv', index = False)
+data = data1.sort_index(axis = 0)
+print(data)
+data.to_csv('../dataset/insect/ant/location_in_mm.csv', index = False)
 
 data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
