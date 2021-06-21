@@ -92,8 +92,8 @@ def location_in_mm(data):
             
             dif_y = np.ones((len(x),))*(i-1)*(40+6)
 
-            x = (x - min_x)/h_x
-            y = (y - min_y)/h_y+dif_y
+            x = np.round((x - min_x)/h_x, 2)
+            y = np.round((y - min_y)/h_y+dif_y, 2)
             
             data['location_x'] = x
             data['location_y'] = y
@@ -129,7 +129,6 @@ def tunnel(data):
                 for i in range(a+1, b):
                     data.iloc[i, 1] = 1
                     data.iloc[i, 2] = (40 + 6) * m - 3
-                print(m)
             
             else:
                 if ((data.iloc[a, 2] - 46 * (data.iloc[a, 3]-1) < 20) 
@@ -181,6 +180,7 @@ def discretization_location(data):
                             if (y <= 138):
                                 label = 291
                             else:
+                                #print(i, x, y)
                                 label = math.ceil((y-18)/5) * math.ceil(x/5) + 3
 
         labels[i, 0] = label
@@ -189,6 +189,30 @@ def discretization_location(data):
     data = pd.concat([data, labels], axis = 1)
     return data
 
+
+def time_series(data):
+
+    time_list = pd.DataFrame(np.unique(data.time), columns = ['time'])
+    index = np.arange(388)
+    lab = np.zeros((len(time_list), 388))
+    lab = pd.DataFrame(lab, columns = index)
+    time_list = pd.concat([time_list, lab], axis = 1)
+    #print(time_list.shape)
+    
+    for i in range(len(time_list)):
+        for j in index:
+            print(data[(data['time'] == time_list.time[i]) & (data['label'] == j)].index.tolist())
+            num = len(data[(data['time'] == time_list.time[i]) & (data['label'] == j)].index.tolist())
+            
+            time_list.iloc[i, j+1] = num
+    '''
+    for i in range(len(data)):
+        ind = np.where(time_list['time'] == data.iloc[i, 0])       
+        tmp = data.iloc[i, 6] + 1
+        print(ind[0][0], tmp)
+        time_list.iloc[int(ind[0][0]), int(tmp)] += 1
+    '''
+    return data, time_list
 
 #data = import_data(1)
 #data = pd.concat([data, import_data(2)], axis = 0)
@@ -200,7 +224,7 @@ def discretization_location(data):
 #data = discretization_time(data)
 #data.to_csv('../dataset/insect/ant/time_discretized.csv', index = False)
 
-'''
+"""
 data = pd.read_csv('../dataset/insect/ant/time_discretized.csv')
 data1 = []
 for i in range(1, 4):
@@ -213,9 +237,12 @@ for i in range(1, 4):
 data = data1
 print(data)
 data.to_csv('../dataset/insect/ant/location_in_mm.csv', index = False)
-'''
+
 data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
-time_list = pd.DataFrame(np.unique(data.time), columns = ['time'])
 data = discretization_location(data)
 print(data)
 data.to_csv('../dataset/insect/ant/data_labelled.csv', index = False)
+"""
+data = pd.read_csv('../dataset/insect/ant/data_labelled.csv')
+data, time_list = time_series(data)
+time_list.to_csv('../dataset/insect/ant/time_series.csv', index = False)
