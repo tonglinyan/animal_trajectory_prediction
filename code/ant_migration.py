@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
+import math
 
 def import_data(num_colony):
     path = "../dataset/insect/ant/tracking data/ant tracking data/Colony %i/Colony_%i_low_density_locations" % (num_colony, num_colony) #文件夹目录
@@ -64,17 +65,19 @@ def discretization_time(data):
 
 
 def location_in_mm(data):
+
     df = data
     return_matrix = []
     min, max = minmax(data)
 
     for i in range(5):
 
-        data = df[df.chamber == i]
-
         if (i == 0):
-            return_matrix = data
+            return_matrix = df[df.chamber == i]
+
         else: 
+            data = df[df.chamber == i]
+
             h_x = (max[0][i-1] - min[0][i-1])/60
             h_y = (max[1][i-1] - min[1][i-1])/40
 
@@ -95,12 +98,60 @@ def location_in_mm(data):
             data['location_y'] = y
     
             return_matrix = pd.concat([return_matrix, data], axis = 0)
+    
+    return_matrix = return_matrix.sort_index(axis = 0)
+    return_matrix = tunnel(return_matrix)
 
     return return_matrix
 
 
 
 def tunnel(data):
+
+    zero_list = np.where(data['chamber'] == 0)
+
+    while (len(zero_list[0])):
+
+        a = zero_list[0][0]
+        b = a + 1
+        a = a - 1
+
+        while (data.iloc[b, 3] == 0):
+            b += 1
+
+        if (data.iloc[a, 4] == data.iloc[b, 4]):
+
+            if (data.iloc[a, 3] != data.iloc[b, 3]):
+
+                m = math.floor((data.iloc[a, 3] + data.iloc[b, 3])/2)
+
+                for i in range(a+1, b):
+                    data.iloc[i, 1] = 1
+                    data.iloc[i, 2] = (40 + 6) * m - 3
+                print(m)
+            
+            else:
+                if ((data.iloc[a, 2] - 46 * (data.iloc[a, 3]-1) < 20) 
+                & (data.iloc[b, 2] - 46 * (data.iloc[a, 3]-1) < 20) 
+                & (data.iloc[a, 3] != 1)):
+                    m = data.iloc[a, 3] - 1
+                    for i in range(a+1, b):
+                        data.iloc[i, 1] = 1
+                        data.iloc[i, 2] = (40 + 6) * m - 3
+
+                if ((data.iloc[a, 2] - 46 * (data.iloc[a, 3]-1) > 20) 
+                & (data.iloc[b, 2] - 46 * (data.iloc[a, 3]-1) > 20) 
+                & (data.iloc[a, 3] != 4)):
+                    m = data.iloc[a, 3]
+                    for i in range(a+1, b):
+                        data.iloc[i, 1] = 1
+                        data.iloc[i, 2] = (40 + 6) * m - 3
+            
+        for i in range(a+1, b):
+            data.iloc[i, 3] = 5
+
+        zero_list = np.where(data['chamber'] == 0)
+
     return data
 
 
@@ -128,8 +179,8 @@ for i in range(1, 4):
     else:
         data1 = pd.concat([data1, df], axis = 0)
 
-data = data1.sort_index(axis = 0)
+data = data1
 print(data)
 data.to_csv('../dataset/insect/ant/location_in_mm.csv', index = False)
 
-data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
+#data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
