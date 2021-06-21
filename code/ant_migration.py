@@ -1,4 +1,5 @@
 import os
+from matplotlib.pyplot import switch_backend
 import pandas as pd
 import numpy as np
 import math
@@ -156,6 +157,36 @@ def tunnel(data):
 
 
 def discretization_location(data):
+
+    labels = np.zeros((len(data), 1))
+    for i in range(len(data)):
+        x = data.iloc[i, 1]
+        y = data.iloc[i, 2]
+
+        if (y <= 40):
+            label = math.ceil(y/5) * math.ceil(x/5)
+        else:
+            if (y <= 46):
+                label = 97
+            else:
+                if (y <= 86):
+                    label = math.ceil((y-6)/5) * math.ceil(x/5) + 1
+                else:
+                    if (y <= 92):
+                        label = 194
+                    else: 
+                        if (y <= 132):
+                            label = math.ceil((y-12)/5) * math.ceil(x/5) + 2
+                        else:
+                            if (y <= 138):
+                                label = 291
+                            else:
+                                label = math.ceil((y-18)/5) * math.ceil(x/5) + 3
+
+        labels[i, 0] = label
+
+    labels = pd.DataFrame(labels, columns = ['label'])
+    data = pd.concat([data, labels], axis = 1)
     return data
 
 
@@ -169,7 +200,7 @@ def discretization_location(data):
 #data = discretization_time(data)
 #data.to_csv('../dataset/insect/ant/time_discretized.csv', index = False)
 
-
+'''
 data = pd.read_csv('../dataset/insect/ant/time_discretized.csv')
 data1 = []
 for i in range(1, 4):
@@ -182,5 +213,9 @@ for i in range(1, 4):
 data = data1
 print(data)
 data.to_csv('../dataset/insect/ant/location_in_mm.csv', index = False)
-
-#data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
+'''
+data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
+time_list = pd.DataFrame(np.unique(data.time), columns = ['time'])
+data = discretization_location(data)
+print(data)
+data.to_csv('../dataset/insect/ant/data_labelled.csv', index = False)
