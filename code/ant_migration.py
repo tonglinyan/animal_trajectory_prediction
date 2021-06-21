@@ -68,31 +68,32 @@ def location_in_mm(data):
     return_matrix = []
     min, max = minmax(data)
 
-    for i in range(4):
-        h_x = (max[0][i] - min[0][i])/60
-        h_y = (max[1][i] - min[1][i])/40
+    for i in range(5):
 
-        data = df[df.chamber == i+1]
+        data = df[df.chamber == i]
 
-        x = data['location_x']
-        x = np.array(x)
-        y = data['location_y']
-        y = np.array(y)
-
-        min_x = np.ones((len(x),))*min[0][i]
-        min_y = np.ones((len(x),))*min[1][i]
-        
-        dif_y = np.ones((len(x),))*i*(40+6)
-
-        x = (x - min_x)/h_x
-        y = (y - min_y)/h_y+dif_y
-        
-        data['location_x'] = x
-        data['location_y'] = y
-        
         if (i == 0):
             return_matrix = data
-        else:
+        else: 
+            h_x = (max[0][i-1] - min[0][i-1])/60
+            h_y = (max[1][i-1] - min[1][i-1])/40
+
+            x = data['location_x']
+            x = np.array(x)
+            y = data['location_y']
+            y = np.array(y)
+
+            min_x = np.ones((len(x),))*min[0][i-1]
+            min_y = np.ones((len(x),))*min[1][i-1]
+            
+            dif_y = np.ones((len(x),))*(i-1)*(40+6)
+
+            x = (x - min_x)/h_x
+            y = (y - min_y)/h_y+dif_y
+            
+            data['location_x'] = x
+            data['location_y'] = y
+    
             return_matrix = pd.concat([return_matrix, data], axis = 0)
 
     return return_matrix
