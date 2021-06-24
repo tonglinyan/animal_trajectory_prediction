@@ -3,6 +3,7 @@ from matplotlib.pyplot import switch_backend
 import pandas as pd
 import numpy as np
 import math
+import matplotlib.pyplot as plt
 
 def import_data(num_colony):
     path = "../dataset/insect/ant/tracking data/ant tracking data/Colony %i/Colony_%i_low_density_locations" % (num_colony, num_colony) #文件夹目录
@@ -105,7 +106,9 @@ def location_in_mm(data):
 
     return return_matrix
 
-
+# trouver le tunnel entre les 4 chambres
+# mettres les fourmis qui en de chambre 0 
+# et satisfont les conditions dans les tunnel
 
 def tunnel(data):
 
@@ -155,6 +158,8 @@ def tunnel(data):
     return data
 
 
+# discrétiser la location en 5mm multiple par 5mm
+# au total 387 boîtes
 def discretization_location(data):
 
     labels = np.zeros((len(data), 1))
@@ -214,6 +219,21 @@ def time_series(data):
     '''
     return data, time_list
 
+
+def ant_location(data):
+    col= np.unique(data['colony_id'])
+    for i in range (len(col)) :
+        ant= data[(data['colony_id']==col[i])]
+        plt.scatter(ant['location_y'], ant['location_x'], c=ant['ant_id'], cmap = 'jet', s=0.1)
+
+        plt.title('location', fontsize=24)
+        plt.xlabel('y',fontsize=16)
+        plt.ylabel('x', fontsize=16)
+
+        plt.savefig("../figures/insect/ant/distribution_colony_%i" % (i+1))
+        plt.show()
+    
+
 #data = import_data(1)
 #data = pd.concat([data, import_data(2)], axis = 0)
 #data = pd.concat([data, import_data(3)], axis = 0)
@@ -237,12 +257,13 @@ for i in range(1, 4):
 data = data1
 print(data)
 data.to_csv('../dataset/insect/ant/location_in_mm.csv', index = False)
-
-data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
-data = discretization_location(data)
-print(data)
-data.to_csv('../dataset/insect/ant/data_labelled.csv', index = False)
 """
-data = pd.read_csv('../dataset/insect/ant/data_labelled.csv')
-data, time_list = time_series(data)
-time_list.to_csv('../dataset/insect/ant/time_series.csv', index = False)
+data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
+ant_location(data)
+#data = discretization_location(data)
+#print(data)
+#data.to_csv('../dataset/insect/ant/data_labelled.csv', index = False)
+
+#data = pd.read_csv('../dataset/insect/ant/data_labelled.csv')
+#data, time_list = time_series(data)
+#time_list.to_csv('../dataset/insect/ant/time_series.csv', index = False)
