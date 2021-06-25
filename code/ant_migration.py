@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+from IPython.core.pylabtools import figsize
 
 def import_data(num_colony):
     path = "../dataset/insect/ant/tracking data/ant tracking data/Colony %i/Colony_%i_low_density_locations" % (num_colony, num_colony) #文件夹目录
@@ -222,13 +223,28 @@ def time_series(data):
 
 def ant_location(data):
     col= np.unique(data['colony_id'])
-    for i in range (len(col)) :
-        ant= data[(data['colony_id']==col[i])]
-        plt.scatter(ant['location_y'], ant['location_x'], c=ant['ant_id'], cmap = 'jet', s=0.1)
 
-        plt.title('location', fontsize=24)
-        plt.xlabel('y',fontsize=16)
-        plt.ylabel('x', fontsize=16)
+    x = [0, 20, 40, 46, 66, 86, 92, 112, 132, 138, 158, 178]
+    ymin = [0, 0, 5, 5, 0, 5, 5, 0, 5, 5, 0, 0]
+    ymax = [60, 49, 60, 60, 49, 60, 60, 49, 60, 60, 49, 60]
+
+    y = [60, 60, 60, 60,  0, 5, 5, 5]
+    xmin = [0, 46, 92, 138,  0, 40, 86, 132]
+    xmax = [40, 86, 132, 178, 178, 46, 92, 138]
+
+    for i in range (len(col)):
+
+        figsize(15,9)
+        fig = plt.figure()
+
+        ant = data[(data['colony_id'] == col[i])]
+        plt.scatter(ant['location_y'], ant['location_x'], c = ant['ant_id'], cmap = 'jet', s=0.1)
+
+        plt.vlines(x, ymin, ymax, color = 'black', lw = 2)
+        plt.hlines(y, xmin, xmax, color = 'black', lw = 2)
+        plt.title('location', fontsize = 24)
+        plt.xlabel('y',fontsize = 16)
+        plt.ylabel('x', fontsize = 16)
 
         plt.savefig("../figures/insect/ant/distribution_colony_%i" % (i+1))
         plt.show()
