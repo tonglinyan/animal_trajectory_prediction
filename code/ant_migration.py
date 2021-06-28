@@ -81,7 +81,7 @@ def location_in_mm(data):
         else: 
             data = df[df.chamber == i]
 
-            h_x = (max[0][i-1] - min[0][i-1])/60
+            h_x = (max[0][i-1] - min[0][i-1])/65
             h_y = (max[1][i-1] - min[1][i-1])/40
 
             x = data['location_x']
@@ -172,19 +172,19 @@ def discretization_location(data):
             label = math.ceil(y/5) * math.ceil(x/5)
         else:
             if (y <= 46):
-                label = 97
+                label = 105
             else:
                 if (y <= 86):
                     label = math.ceil((y-6)/5) * math.ceil(x/5) + 1
                 else:
                     if (y <= 92):
-                        label = 194
+                        label = 210
                     else: 
                         if (y <= 132):
                             label = math.ceil((y-12)/5) * math.ceil(x/5) + 2
                         else:
                             if (y <= 138):
-                                label = 291
+                                label = 315
                             else:
                                 #print(i, x, y)
                                 label = math.ceil((y-18)/5) * math.ceil(x/5) + 3
@@ -199,8 +199,8 @@ def discretization_location(data):
 def time_series(data):
 
     time_list = pd.DataFrame(np.unique(data.time), columns = ['time'])
-    index = np.arange(388)
-    lab = np.zeros((len(time_list), 388))
+    index = np.arange(420)
+    lab = np.zeros((len(time_list), 420))
     lab = pd.DataFrame(lab, columns = index)
     time_list = pd.concat([time_list, lab], axis = 1)
     #print(time_list.shape)
@@ -226,9 +226,9 @@ def ant_location(data):
 
     x = [0, 20, 40, 46, 66, 86, 92, 112, 132, 138, 158, 178]
     ymin = [0, 0, 5, 5, 0, 5, 5, 0, 5, 5, 0, 0]
-    ymax = [60, 49, 60, 60, 49, 60, 60, 49, 60, 60, 49, 60]
+    ymax = [65, 49, 65, 65, 49, 65, 65, 49, 65, 65, 49, 65]
 
-    y = [60, 60, 60, 60,  0, 5, 5, 5]
+    y = [65, 65, 65, 65,  0, 5, 5, 5]
     xmin = [0, 46, 92, 138,  0, 40, 86, 132]
     xmax = [40, 86, 132, 178, 178, 46, 92, 138]
 
@@ -260,7 +260,7 @@ def ant_location(data):
 #data = discretization_time(data)
 #data.to_csv('../dataset/insect/ant/time_discretized.csv', index = False)
 
-"""
+
 data = pd.read_csv('../dataset/insect/ant/time_discretized.csv')
 data1 = []
 for i in range(1, 4):
@@ -273,7 +273,7 @@ for i in range(1, 4):
 data = data1
 print(data)
 data.to_csv('../dataset/insect/ant/location_in_mm.csv', index = False)
-"""
+
 data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
 ant_location(data)
 #data = discretization_location(data)
