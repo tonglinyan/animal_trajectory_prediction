@@ -260,7 +260,7 @@ def ant_location(data):
 #data = discretization_time(data)
 #data.to_csv('../dataset/insect/ant/time_discretized.csv', index = False)
 
-
+'''
 data = pd.read_csv('../dataset/insect/ant/time_discretized.csv')
 data1 = []
 for i in range(1, 4):
@@ -273,13 +273,13 @@ for i in range(1, 4):
 data = data1
 print(data)
 data.to_csv('../dataset/insect/ant/location_in_mm.csv', index = False)
-
+'''
 data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
 ant_location(data)
-#data = discretization_location(data)
-#print(data)
-#data.to_csv('../dataset/insect/ant/data_labelled.csv', index = False)
+data = discretization_location(data)
+print(data)
+data.to_csv('../dataset/insect/ant/data_labelled.csv', index = False)
 
-#data = pd.read_csv('../dataset/insect/ant/data_labelled.csv')
-#data, time_list = time_series(data)
-#time_list.to_csv('../dataset/insect/ant/time_series.csv', index = False)
+data = pd.read_csv('../dataset/insect/ant/data_labelled.csv')
+data, time_list = time_series(data)
+time_list.to_csv('../dataset/insect/ant/time_series.csv', index = False)
