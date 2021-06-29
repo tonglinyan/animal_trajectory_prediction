@@ -1,4 +1,5 @@
 import os
+from time import time
 from matplotlib.pyplot import switch_backend
 import pandas as pd
 import numpy as np
@@ -59,14 +60,6 @@ def minmax(data):
     return min, max
 
 
-def discretization_time(data):
-
-    data = data[(data.time == 1) | (data.time % 5 == 1)]
-    data = data.reset_index(drop=True)
-
-    return data
-
-
 def location_in_mm(data):
 
     df = data
@@ -117,12 +110,16 @@ def tunnel(data):
 
     while (len(zero_list[0])):
 
+
         a = zero_list[0][0]
         b = a + 1
         a = a - 1
 
         while (data.iloc[b, 3] == 0):
             b += 1
+
+        for i in range(a+1, b):
+            data.iloc[i, 3] = 5
 
         if (data.iloc[a, 4] == data.iloc[b, 4]):
 
@@ -133,36 +130,151 @@ def tunnel(data):
                 for i in range(a+1, b):
                     data.iloc[i, 1] = 1
                     data.iloc[i, 2] = (40 + 6) * m - 3
+                    data.iloc[i, 3] = m
             
             else:
                 if ((data.iloc[a, 2] - 46 * (data.iloc[a, 3]-1) < 20) 
-                & (data.iloc[b, 2] - 46 * (data.iloc[a, 3]-1) < 20) 
-                & (data.iloc[a, 3] != 1)):
-                    m = data.iloc[a, 3] - 1
-                    for i in range(a+1, b):
-                        data.iloc[i, 1] = 1
-                        data.iloc[i, 2] = (40 + 6) * m - 3
+                & (data.iloc[b, 2] - 46 * (data.iloc[a, 3]-1) < 20)):
+                    if (data.iloc[a, 3] != 1):
+                        m = data.iloc[a, 3] - 1
+                        for i in range(a+1, b):
+                            data.iloc[i, 1] = 1
+                            data.iloc[i, 2] = (40 + 6) * m - 3
+                            data.iloc[i, 3] = m
+                    else:
+                        m = 1
+                        for i in range(a+1, b):
+                            data.iloc[i, 1] = 1
+                            data.iloc[i, 2] = 0
+                            data.iloc[i, 3] = m
 
-                if ((data.iloc[a, 2] - 46 * (data.iloc[a, 3]-1) > 20) 
-                & (data.iloc[b, 2] - 46 * (data.iloc[a, 3]-1) > 20) 
-                & (data.iloc[a, 3] != 4)):
-                    m = data.iloc[a, 3]
-                    for i in range(a+1, b):
-                        data.iloc[i, 1] = 1
-                        data.iloc[i, 2] = (40 + 6) * m - 3
-            
-        for i in range(a+1, b):
-            data.iloc[i, 3] = 5
+                if ((data.iloc[a, 2] - 46 * (data.iloc[a, 3] - 1) > 20) 
+                & (data.iloc[b, 2] - 46 * (data.iloc[a, 3] - 1) > 20)):
+                    if (data.iloc[a, 3] != 4):
+                        m = data.iloc[a, 3]
+                        for i in range(a+1, b):
+                            data.iloc[i, 1] = 1
+                            data.iloc[i, 2] = (40 + 6) * m - 3
+                            data.iloc[i, 3] = m
+                    else:
+                        m = 4
+                        for i in range(a+1, b):
+                            data.iloc[i, 1] = 1
+                            data.iloc[i, 2] = 178
+                            data.iloc[i, 3] = m
+
 
         zero_list = np.where(data['chamber'] == 0)
 
     return data
 
 
-# discrétiser la location en 5mm multiple par 5mm
-# au total 387 boîtes
-def discretization_location(data):
 
+def time_series(data):
+
+    time_list = pd.DataFrame(np.unique(data.time), columns = ['time'])
+    index = np.arange(420)
+    lab = np.zeros((len(time_list), 420))
+    lab = pd.DataFrame(lab, columns = index)
+    time_list = pd.concat([time_list, lab], axis = 1)
+    #print(time_list.shape)
+    
+    for i in range(len(time_list)):
+        for j in index:
+            print(data[(data['time'] == time_list.time[i]) & (data['label'] == j)].index.tolist())
+            num = len(data[(data['time'] == time_list.time[i]) & (data['label'] == j)].index.tolist())
+            
+            time_list.iloc[i, j+1] = num
+    '''
+    for i in range(len(data)):
+        ind = np.where(time_list['time'] == data.iloc[i, 0])       
+        tmp = data.iloc[i, 6] + 1
+        print(ind[0][0], tmp)
+        time_list.iloc[int(ind[0][0]), int(tmp)] += 1
+    '''
+    return data, time_list
+
+
+    
+# step 1: import dataset 3 colonies 
+def import_all_dataset():
+    data = import_data(1)
+    data = pd.concat([data, import_data(2)], axis = 0)
+    data = pd.concat([data, import_data(3)], axis = 0)
+    data.to_csv('../dataset/insect/ant/after_processing.csv', index = False)
+    return data
+
+
+
+# step 2: discretisation of time, each 5 second
+#data = pd.read_csv('../dataset/insect/ant/after_processing.csv')
+#data = discretization_time(data)
+#data.to_csv('../dataset/insect/ant/time_discretized.csv', index = False)
+def discretization_time():
+    data = pd.read_csv('../dataset/insect/ant/after_processing.csv')
+    data = data[(data.time == 1) | (data.time % 5 == 1)]
+    data = data.reset_index(drop=True)
+    data.to_csv('../dataset/insect/ant/time_discretized.csv', index = False)
+    return data
+
+
+
+# step 3: integration of coordinate
+def integration_coordinate():
+    data = pd.read_csv('../dataset/insect/ant/time_discretized.csv')
+    data1 = []
+    for i in range(1, 4):
+        df = location_in_mm(data[data.colony_id == i])
+        if (i == 1):
+            data1 = df
+        else:
+            data1 = pd.concat([data1, df], axis = 0)
+    data = data1
+    data.to_csv('../dataset/insect/ant/location_in_mm.csv', index = False)
+    return data
+
+
+
+# step 4: plot distribution of ant
+#data = pd.read_csv('../dataset/insect/ant/time_discretized.csv')
+#ant_location(data)
+def ant_location():
+    data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
+    col= np.unique(data['colony_id'])
+
+    x = [0, 20, 40, 46, 66, 86, 92, 112, 132, 138, 158, 178]
+    ymin = [0, 0, 5, 5, 0, 5, 5, 0, 5, 5, 0, 0]
+    ymax = [65, 49, 65, 65, 49, 65, 65, 49, 65, 65, 49, 65]
+
+    y = [65, 65, 65, 65,  0, 5, 5, 5]
+    xmin = [0, 46, 92, 138,  0, 40, 86, 132]
+    xmax = [40, 86, 132, 178, 178, 46, 92, 138]
+
+    for i in range (len(col)):
+
+        figsize(15,9)
+        fig = plt.figure()
+
+        ant = data[(data['colony_id'] == col[i])]
+        plt.scatter(ant['location_y'], ant['location_x'], c = ant['ant_id'], cmap = 'jet', s=0.1)
+
+        plt.vlines(x, ymin, ymax, color = 'black', lw = 2)
+        plt.hlines(y, xmin, xmax, color = 'black', lw = 2)
+        plt.title('location', fontsize = 24)
+        plt.xlabel('y',fontsize = 16)
+        plt.ylabel('x', fontsize = 16)
+
+        plt.savefig("../figures/insect/ant/distribution_colony_%i" % (i+1))
+        plt.show()
+
+
+
+# step 5: discretisation of location, box of 5mm * 5mm
+#data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
+#data = discretization_location(data)
+#data.to_csv('../dataset/insect/ant/data_labelled.csv', index = False)
+def discretization_location():
+    data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
     labels = np.zeros((len(data), 1))
     for i in range(len(data)):
         x = data.iloc[i, 1]
@@ -193,93 +305,40 @@ def discretization_location(data):
 
     labels = pd.DataFrame(labels, columns = ['label'])
     data = pd.concat([data, labels], axis = 1)
+    data.to_csv('../dataset/insect/ant/data_labelled.csv', index = False)
     return data
 
 
-def time_series(data):
+
+# step 6: time series of boxes
+def time_series_boxes():
+    data = pd.read_csv('../dataset/insect/ant/data_labelled.csv')
+    data, time_list = time_series(data)
+    time_list.to_csv('../dataset/insect/ant/time_series_boxes.csv', index = False)
+
+
+
+# step 7: time series of chambers
+def time_series_chambers():
+    data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
 
     time_list = pd.DataFrame(np.unique(data.time), columns = ['time'])
-    index = np.arange(420)
-    lab = np.zeros((len(time_list), 420))
-    lab = pd.DataFrame(lab, columns = index)
-    time_list = pd.concat([time_list, lab], axis = 1)
-    #print(time_list.shape)
-    
-    for i in range(len(time_list)):
-        for j in index:
-            print(data[(data['time'] == time_list.time[i]) & (data['label'] == j)].index.tolist())
-            num = len(data[(data['time'] == time_list.time[i]) & (data['label'] == j)].index.tolist())
-            
-            time_list.iloc[i, j+1] = num
-    '''
-    for i in range(len(data)):
-        ind = np.where(time_list['time'] == data.iloc[i, 0])       
-        tmp = data.iloc[i, 6] + 1
-        print(ind[0][0], tmp)
-        time_list.iloc[int(ind[0][0]), int(tmp)] += 1
-    '''
-    return data, time_list
 
+    k = 1
+    for i in range(len(np.unique(data.colony_id))):
+        for j in range(len(np.unique(data[data['colony_id'] == i+1]['ant_id']))):
+            tmp = data[(data['colony_id'] == i+1) & (data['ant_id']== j)]['chamber']
+            tmp.reset_index(drop = True, inplace = True)
+            time_list = pd.concat([time_list, tmp], axis = 1)
+            time_list.rename({'chamber':'%i'%k}, axis = 'columns', inplace = True)
+            #print(time_list)
+            k += 1
 
-def ant_location(data):
-    col= np.unique(data['colony_id'])
+    print(time_list)
+    time_list.to_csv('../dataset/insect/ant/time_series_chamber.csv', index = False)
+    return time_list
 
-    x = [0, 20, 40, 46, 66, 86, 92, 112, 132, 138, 158, 178]
-    ymin = [0, 0, 5, 5, 0, 5, 5, 0, 5, 5, 0, 0]
-    ymax = [65, 49, 65, 65, 49, 65, 65, 49, 65, 65, 49, 65]
-
-    y = [65, 65, 65, 65,  0, 5, 5, 5]
-    xmin = [0, 46, 92, 138,  0, 40, 86, 132]
-    xmax = [40, 86, 132, 178, 178, 46, 92, 138]
-
-    for i in range (len(col)):
-
-        figsize(15,9)
-        fig = plt.figure()
-
-        ant = data[(data['colony_id'] == col[i])]
-        plt.scatter(ant['location_y'], ant['location_x'], c = ant['ant_id'], cmap = 'jet', s=0.1)
-
-        plt.vlines(x, ymin, ymax, color = 'black', lw = 2)
-        plt.hlines(y, xmin, xmax, color = 'black', lw = 2)
-        plt.title('location', fontsize = 24)
-        plt.xlabel('y',fontsize = 16)
-        plt.ylabel('x', fontsize = 16)
-
-        plt.savefig("../figures/insect/ant/distribution_colony_%i" % (i+1))
-        plt.show()
-    
-
-#data = import_data(1)
-#data = pd.concat([data, import_data(2)], axis = 0)
-#data = pd.concat([data, import_data(3)], axis = 0)
-#data.to_csv('../dataset/insect/ant/after_processing.csv', index = False)
-
-
-#data = pd.read_csv('../dataset/insect/ant/after_processing.csv')
-#data = discretization_time(data)
-#data.to_csv('../dataset/insect/ant/time_discretized.csv', index = False)
-
-'''
-data = pd.read_csv('../dataset/insect/ant/time_discretized.csv')
-data1 = []
-for i in range(1, 4):
-    df = location_in_mm(data[data.colony_id == i])
-    if (i == 1):
-        data1 = df
-    else:
-        data1 = pd.concat([data1, df], axis = 0)
-
-data = data1
-print(data)
-data.to_csv('../dataset/insect/ant/location_in_mm.csv', index = False)
-'''
-data = pd.read_csv('../dataset/insect/ant/location_in_mm.csv')
-ant_location(data)
-data = discretization_location(data)
-print(data)
-data.to_csv('../dataset/insect/ant/data_labelled.csv', index = False)
-
-data = pd.read_csv('../dataset/insect/ant/data_labelled.csv')
-data, time_list = time_series(data)
-time_list.to_csv('../dataset/insect/ant/time_series.csv', index = False)
+#integration_coordinate()
+ant_location()
+discretization_location()
+time_series_chambers()
