@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 from IPython.core.pylabtools import figsize
 
 def import_data(num_colony):
@@ -118,7 +119,7 @@ def tunnel(data):
         while (data.iloc[b, 3] == 0):
             b += 1
 
-        for i in range(a+1, b):
+        for i in tqdm(range(a+1, b)):
             data.iloc[i, 3] = 5
 
         if (data.iloc[a, 4] == data.iloc[b, 4]):
@@ -221,7 +222,7 @@ def discretization_time():
 
 # step 3: integration of coordinate
 def integration_coordinate():
-    data = pd.read_csv('../dataset/insect/ant/time_discretized.csv')
+    data = pd.read_csv('../dataset/insect/ant/after_processing.csv')
     data1 = []
     for i in range(1, 4):
         df = location_in_mm(data[data.colony_id == i])
@@ -229,9 +230,9 @@ def integration_coordinate():
             data1 = df
         else:
             data1 = pd.concat([data1, df], axis = 0)
-    data = data1
-    data.to_csv('../dataset/insect/ant/location_in_mm.csv', index = False)
-    return data
+    data1
+    data1.to_csv('../dataset/insect/ant/location_in_mm1.csv', index = False)
+    return data1
 
 
 
@@ -338,7 +339,7 @@ def time_series_chambers():
     time_list.to_csv('../dataset/insect/ant/time_series_chamber.csv', index = False)
     return time_list
 
-#integration_coordinate()
-ant_location()
-discretization_location()
-time_series_chambers()
+print(integration_coordinate())
+#ant_location()
+#discretization_location()
+#time_series_chambers()
