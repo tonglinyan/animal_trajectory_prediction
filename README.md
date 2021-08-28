@@ -30,4 +30,4 @@ You need files "time_filled_AR.csv" to do the ARIMA forecasting. "bird_forecasti
 	"bird_forecasting_RFR_hyperpar" is used to tune the hyperparameters "n_estimators" and "max_depth".
 	"config.json" has the parameters with best performance given by the hyperparameter tuning.
 	"bird_forecasting_RFR_best" gives the best performance by importing the "config.json".
-	In order to run the code, you need all the dataset mentioned before.
+In order to run the code, you need all the dataset mentioned before.
