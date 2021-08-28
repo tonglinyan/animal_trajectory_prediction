@@ -2,6 +2,7 @@
 In this repository, we try to forecasting the ants trajectory and birds spring migration with methods ARIMA(VARMA) and random forest regression.
 
 # Ant
+The goal of this part is to predict the number of chamber where ants stay with ARIMA method.
 
 ## Dataset
 To get the dataset of ant, download the compressed file "data_ant" and decompress. There's a further explaination of dataset in the "data_ant".
@@ -10,7 +11,7 @@ To get the dataset of ant, download the compressed file "data_ant" and decompres
 
 For the ants, there's no missing data. We can get a complete data by combining all the individual ones with "ang_processing.ipynb".
 
-## ## Modeling and Forecasting
+## Modeling and Forecasting
 
 	"ant_forecasting_arima.ipynb" predicts the number of chamber directly.
 	"ant_location_forecasting.ipynb" predicts the location of ant, and transfers the location to the number of chamber.
@@ -18,6 +19,7 @@ For the ants, there's no missing data. We can get a complete data by combining a
 
 
 # Bird
+The goal of this part is to predict the spring migration of bird (more specifically density of birds) with ARIMA method and random forest method.
 ## Dataset
 You can download dataset "radar_narr_combine.csv.gz" and decompress it, then you will get a complete dataset in the forme of csv.
 
