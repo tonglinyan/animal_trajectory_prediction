@@ -1,137 +1,136 @@
 {"lags": "3", "random_state": "100"}
-{"radar": "KABR", "n_estimators": "50"}
-{"radar": "KABX", "n_estimators": "100"}
-{"radar": "KAKQ", "n_estimators": "90"}
-{"radar": "KAMA", "n_estimators": "70"}
-{"radar": "KAMX", "n_estimators": "80"}
-{"radar": "KAPX", "n_estimators": "50"}
-{"radar": "KARX", "n_estimators": "100"}
-{"radar": "KATX", "n_estimators": "90"}
-{"radar": "KBBX", "n_estimators": "80"}
-{"radar": "KBGM", "n_estimators": "80"}
-{"radar": "KBHX", "n_estimators": "50"}
-{"radar": "KBIS", "n_estimators": "100"}
-{"radar": "KBLX", "n_estimators": "90"}
-{"radar": "KBMX", "n_estimators": "80"}
-{"radar": "KBOX", "n_estimators": "70"}
-{"radar": "KBRO", "n_estimators": "30"}
-{"radar": "KBUF", "n_estimators": "100"}
-{"radar": "KBYX", "n_estimators": "30"}
-{"radar": "KCAE", "n_estimators": "100"}
-{"radar": "KCBW", "n_estimators": "30"}
-{"radar": "KCBX", "n_estimators": "90"}
-{"radar": "KCCX", "n_estimators": "30"}
-{"radar": "KCLE", "n_estimators": "80"}
-{"radar": "KCLX", "n_estimators": "60"}
-{"radar": "KCRP", "n_estimators": "30"}
-{"radar": "KCXX", "n_estimators": "80"}
-{"radar": "KCYS", "n_estimators": "60"}
-{"radar": "KDAX", "n_estimators": "100"}
-{"radar": "KDDC", "n_estimators": "70"}
-{"radar": "KDFX", "n_estimators": "50"}
-{"radar": "KDGX", "n_estimators": "60"}
-{"radar": "KDIX", "n_estimators": "40"}
-{"radar": "KDLH", "n_estimators": "90"}
-{"radar": "KDMX", "n_estimators": "80"}
-{"radar": "KDOX", "n_estimators": "100"}
-{"radar": "KDTX", "n_estimators": "100"}
-{"radar": "KDVN", "n_estimators": "70"}
-{"radar": "KDYX", "n_estimators": "80"}
-{"radar": "KEAX", "n_estimators": "80"}
-{"radar": "KEMX", "n_estimators": "100"}
-{"radar": "KENX", "n_estimators": "100"}
-{"radar": "KEOX", "n_estimators": "30"}
-{"radar": "KEPZ", "n_estimators": "100"}
-{"radar": "KESX", "n_estimators": "80"}
-{"radar": "KEVX", "n_estimators": "90"}
-{"radar": "KEWX", "n_estimators": "50"}
-{"radar": "KEYX", "n_estimators": "100"}
-{"radar": "KFCX", "n_estimators": "90"}
-{"radar": "KFDR", "n_estimators": "100"}
-{"radar": "KFDX", "n_estimators": "30"}
-{"radar": "KFFC", "n_estimators": "40"}
-{"radar": "KFSD", "n_estimators": "80"}
-{"radar": "KFSX", "n_estimators": "70"}
-{"radar": "KFTG", "n_estimators": "90"}
-{"radar": "KFWS", "n_estimators": "50"}
-{"radar": "KGGW", "n_estimators": "100"}
-{"radar": "KGJX", "n_estimators": "60"}
-{"radar": "KGLD", "n_estimators": "40"}
-{"radar": "KGRB", "n_estimators": "70"}
-{"radar": "KGRK", "n_estimators": "100"}
-{"radar": "KGRR", "n_estimators": "30"}
-{"radar": "KGSP", "n_estimators": "30"}
-{"radar": "KGWX", "n_estimators": "100"}
-{"radar": "KGYX", "n_estimators": "100"}
-{"radar": "KHDX", "n_estimators": "80"}
-{"radar": "KHGX", "n_estimators": "30"}
-{"radar": "KHNX", "n_estimators": "30"}
-{"radar": "KHTX", "n_estimators": "100"}
-{"radar": "KICT", "n_estimators": "70"}
-{"radar": "KICX", "n_estimators": "90"}
-{"radar": "KILN", "n_estimators": "60"}
-{"radar": "KILX", "n_estimators": "100"}
-{"radar": "KIND", "n_estimators": "60"}
-{"radar": "KINX", "n_estimators": "80"}
-{"radar": "KIWA", "n_estimators": "30"}
-{"radar": "KIWX", "n_estimators": "80"}
-{"radar": "KJAX", "n_estimators": "50"}
-{"radar": "KJGX", "n_estimators": "50"}
-{"radar": "KJKL", "n_estimators": "60"}
-{"radar": "KLBB", "n_estimators": "80"}
-{"radar": "KLCH", "n_estimators": "30"}
-{"radar": "KLIX", "n_estimators": "30"}
-{"radar": "KLNX", "n_estimators": "80"}
-{"radar": "KLOT", "n_estimators": "30"}
-{"radar": "KLRX", "n_estimators": "100"}
-{"radar": "KLSX", "n_estimators": "70"}
-{"radar": "KLTX", "n_estimators": "90"}
-{"radar": "KLVX", "n_estimators": "100"}
-{"radar": "KLWX", "n_estimators": "50"}
-{"radar": "KLZK", "n_estimators": "80"}
-{"radar": "KMAF", "n_estimators": "40"}
-{"radar": "KMAX", "n_estimators": "30"}
-{"radar": "KMHX", "n_estimators": "30"}
-{"radar": "KMKX", "n_estimators": "90"}
-{"radar": "KMLB", "n_estimators": "100"}
-{"radar": "KMOB", "n_estimators": "70"}
-{"radar": "KMPX", "n_estimators": "100"}
-{"radar": "KMQT", "n_estimators": "100"}
-{"radar": "KMRX", "n_estimators": "70"}
-{"radar": "KMSX", "n_estimators": "30"}
-{"radar": "KMTX", "n_estimators": "30"}
-{"radar": "KMUX", "n_estimators": "60"}
-{"radar": "KMVX", "n_estimators": "80"}
-{"radar": "KNKX", "n_estimators": "80"}
-{"radar": "KNQA", "n_estimators": "30"}
-{"radar": "KOAX", "n_estimators": "100"}
-{"radar": "KOHX", "n_estimators": "40"}
-{"radar": "KOKX", "n_estimators": "70"}
-{"radar": "KOTX", "n_estimators": "30"}
-{"radar": "KPAH", "n_estimators": "100"}
-{"radar": "KPBZ", "n_estimators": "80"}
-{"radar": "KPDT", "n_estimators": "50"}
-{"radar": "KPUX", "n_estimators": "100"}
-{"radar": "KRAX", "n_estimators": "70"}
-{"radar": "KRGX", "n_estimators": "80"}
-{"radar": "KRIW", "n_estimators": "100"}
-{"radar": "KRLX", "n_estimators": "80"}
-{"radar": "KRTX", "n_estimators": "100"}
-{"radar": "KSFX", "n_estimators": "60"}
-{"radar": "KSGF", "n_estimators": "90"}
-{"radar": "KSHV", "n_estimators": "40"}
-{"radar": "KSJT", "n_estimators": "80"}
-{"radar": "KSOX", "n_estimators": "80"}
-{"radar": "KSRX", "n_estimators": "100"}
-{"radar": "KTBW", "n_estimators": "40"}
-{"radar": "KTFX", "n_estimators": "70"}
-{"radar": "KTLH", "n_estimators": "70"}
-{"radar": "KTLX", "n_estimators": "100"}
-{"radar": "KTWX", "n_estimators": "60"}
-{"radar": "KTYX", "n_estimators": "100"}
-{"radar": "KUDX", "n_estimators": "30"}
-{"radar": "KUEX", "n_estimators": "70"}
-{"radar": "KVNX", "n_estimators": "70"}
-{"radar": "KVTX", "n_estimators": "60"}
-{"radar": "KVWX", "n_estimators": "30"}
-{"radar": "KYUX", "n_estimators": "90"}
+{"radar": "KABR", "n_estimators": "30", "max_depth": "16"}
+{"radar": "KABX", "n_estimators": "50", "max_depth": "14"}
+{"radar": "KAKQ", "n_estimators": "90", "max_depth": "13"}
+{"radar": "KAMA", "n_estimators": "100", "max_depth": "17"}
+{"radar": "KAMX", "n_estimators": "50", "max_depth": "15"}
+{"radar": "KAPX", "n_estimators": "40", "max_depth": "10"}
+{"radar": "KARX", "n_estimators": "100", "max_depth": "16"}
+{"radar": "KATX", "n_estimators": "90", "max_depth": "10"}
+{"radar": "KBBX", "n_estimators": "90", "max_depth": "15"}
+{"radar": "KBGM", "n_estimators": "80", "max_depth": "18"}
+{"radar": "KBHX", "n_estimators": "100", "max_depth": "17"}
+{"radar": "KBIS", "n_estimators": "100", "max_depth": "10"}
+{"radar": "KBLX", "n_estimators": "90", "max_depth": "13"}
+{"radar": "KBMX", "n_estimators": "80", "max_depth": "12"}
+{"radar": "KBOX", "n_estimators": "90", "max_depth": "16"}
+{"radar": "KBRO", "n_estimators": "30", "max_depth": "17"}
+{"radar": "KBUF", "n_estimators": "100", "max_depth": "12"}
+{"radar": "KBYX", "n_estimators": "50", "max_depth": "16"}
+{"radar": "KCAE", "n_estimators": "100", "max_depth": "17"}
+{"radar": "KCBW", "n_estimators": "100", "max_depth": "19"}
+{"radar": "KCBX", "n_estimators": "60", "max_depth": "17"}
+{"radar": "KCCX", "n_estimators": "30", "max_depth": "18"}
+{"radar": "KCLE", "n_estimators": "30", "max_depth": "16"}
+{"radar": "KCLX", "n_estimators": "60", "max_depth": "12"}
+{"radar": "KCRP", "n_estimators": "60", "max_depth": "17"}
+{"radar": "KCXX", "n_estimators": "30", "max_depth": "17"}
+{"radar": "KCYS", "n_estimators": "100", "max_depth": "15"}
+{"radar": "KDAX", "n_estimators": "100", "max_depth": "17"}
+{"radar": "KDDC", "n_estimators": "70", "max_depth": "10"}
+{"radar": "KDFX", "n_estimators": "30", "max_depth": "18"}
+{"radar": "KDGX", "n_estimators": "40", "max_depth": "12"}
+{"radar": "KDIX", "n_estimators": "90", "max_depth": "12"}
+{"radar": "KDLH", "n_estimators": "60", "max_depth": "19"}
+{"radar": "KDMX", "n_estimators": "50", "max_depth": "10"}
+{"radar": "KDOX", "n_estimators": "70", "max_depth": "10"}
+{"radar": "KDTX", "n_estimators": "90", "max_depth": "11"}
+{"radar": "KDVN", "n_estimators": "60", "max_depth": "11"}
+{"radar": "KDYX", "n_estimators": "50", "max_depth": "10"}
+{"radar": "KEAX", "n_estimators": "60", "max_depth": "16"}
+{"radar": "KEMX", "n_estimators": "100", "max_depth": "18"}
+{"radar": "KENX", "n_estimators": "80", "max_depth": "15"}
+{"radar": "KEPZ", "n_estimators": "100", "max_depth": "19"}
+{"radar": "KESX", "n_estimators": "80", "max_depth": "17"}
+{"radar": "KEVX", "n_estimators": "100", "max_depth": "17"}
+{"radar": "KEWX", "n_estimators": "40", "max_depth": "17"}
+{"radar": "KEYX", "n_estimators": "100", "max_depth": "19"}
+{"radar": "KFCX", "n_estimators": "80", "max_depth": "14"}
+{"radar": "KFDR", "n_estimators": "50", "max_depth": "14"}
+{"radar": "KFDX", "n_estimators": "50", "max_depth": "16"}
+{"radar": "KFFC", "n_estimators": "40", "max_depth": "16"}
+{"radar": "KFSD", "n_estimators": "80", "max_depth": "17"}
+{"radar": "KFSX", "n_estimators": "70", "max_depth": "12"}
+{"radar": "KFTG", "n_estimators": "90", "max_depth": "16"}
+{"radar": "KFWS", "n_estimators": "70", "max_depth": "12"}
+{"radar": "KGGW", "n_estimators": "100", "max_depth": "19"}
+{"radar": "KGJX", "n_estimators": "60", "max_depth": "14"}
+{"radar": "KGLD", "n_estimators": "40", "max_depth": "19"}
+{"radar": "KGRB", "n_estimators": "70", "max_depth": "15"}
+{"radar": "KGRK", "n_estimators": "100", "max_depth": "15"}
+{"radar": "KGRR", "n_estimators": "30", "max_depth": "19"}
+{"radar": "KGSP", "n_estimators": "50", "max_depth": "11"}
+{"radar": "KGWX", "n_estimators": "100", "max_depth": "18"}
+{"radar": "KGYX", "n_estimators": "100", "max_depth": "19"}
+{"radar": "KHDX", "n_estimators": "80", "max_depth": "11"}
+{"radar": "KHGX", "n_estimators": "30", "max_depth": "10"}
+{"radar": "KHNX", "n_estimators": "30", "max_depth": "15"}
+{"radar": "KHTX", "n_estimators": "100", "max_depth": "18"}
+{"radar": "KICT", "n_estimators": "70", "max_depth": "14"}
+{"radar": "KICX", "n_estimators": "90", "max_depth": "13"}
+{"radar": "KILN", "n_estimators": "60", "max_depth": "10"}
+{"radar": "KILX", "n_estimators": "50", "max_depth": "18"}
+{"radar": "KIND", "n_estimators": "60", "max_depth": "11"}
+{"radar": "KINX", "n_estimators": "80", "max_depth": "10"}
+{"radar": "KIWA", "n_estimators": "30", "max_depth": "17"}
+{"radar": "KIWX", "n_estimators": "100", "max_depth": "13"}
+{"radar": "KJAX", "n_estimators": "40", "max_depth": "13"}
+{"radar": "KJGX", "n_estimators": "30", "max_depth": "18"}
+{"radar": "KJKL", "n_estimators": "100", "max_depth": "10"}
+{"radar": "KLBB", "n_estimators": "50", "max_depth": "10"}
+{"radar": "KLCH", "n_estimators": "50", "max_depth": "18"}
+{"radar": "KLIX", "n_estimators": "60", "max_depth": "17"}
+{"radar": "KLNX", "n_estimators": "80", "max_depth": "13"}
+{"radar": "KLOT", "n_estimators": "30", "max_depth": "19"}
+{"radar": "KLRX", "n_estimators": "90", "max_depth": "18"}
+{"radar": "KLSX", "n_estimators": "70", "max_depth": "11"}
+{"radar": "KLTX", "n_estimators": "90", "max_depth": "13"}
+{"radar": "KLVX", "n_estimators": "90", "max_depth": "18"}
+{"radar": "KLWX", "n_estimators": "70", "max_depth": "15"}
+{"radar": "KLZK", "n_estimators": "40", "max_depth": "12"}
+{"radar": "KMAF", "n_estimators": "40", "max_depth": "15"}
+{"radar": "KMAX", "n_estimators": "30", "max_depth": "18"}
+{"radar": "KMHX", "n_estimators": "60", "max_depth": "19"}
+{"radar": "KMKX", "n_estimators": "90", "max_depth": "14"}
+{"radar": "KMLB", "n_estimators": "60", "max_depth": "16"}
+{"radar": "KMOB", "n_estimators": "90", "max_depth": "17"}
+{"radar": "KMPX", "n_estimators": "100", "max_depth": "19"}
+{"radar": "KMQT", "n_estimators": "100", "max_depth": "15"}
+{"radar": "KMRX", "n_estimators": "30", "max_depth": "13"}
+{"radar": "KMSX", "n_estimators": "30", "max_depth": "19"}
+{"radar": "KMTX", "n_estimators": "90", "max_depth": "19"}
+{"radar": "KMUX", "n_estimators": "40", "max_depth": "17"}
+{"radar": "KMVX", "n_estimators": "80", "max_depth": "12"}
+{"radar": "KNKX", "n_estimators": "90", "max_depth": "18"}
+{"radar": "KNQA", "n_estimators": "30", "max_depth": "18"}
+{"radar": "KOAX", "n_estimators": "100", "max_depth": "19"}
+{"radar": "KOHX", "n_estimators": "40", "max_depth": "17"}
+{"radar": "KOKX", "n_estimators": "30", "max_depth": "13"}
+{"radar": "KOTX", "n_estimators": "40", "max_depth": "17"}
+{"radar": "KPAH", "n_estimators": "100", "max_depth": "15"}
+{"radar": "KPBZ", "n_estimators": "50", "max_depth": "18"}
+{"radar": "KPDT", "n_estimators": "50", "max_depth": "17"}
+{"radar": "KPUX", "n_estimators": "100", "max_depth": "18"}
+{"radar": "KRAX", "n_estimators": "80", "max_depth": "12"}
+{"radar": "KRGX", "n_estimators": "80", "max_depth": "11"}
+{"radar": "KRIW", "n_estimators": "100", "max_depth": "19"}
+{"radar": "KRLX", "n_estimators": "90", "max_depth": "18"}
+{"radar": "KRTX", "n_estimators": "100", "max_depth": "17"}
+{"radar": "KSFX", "n_estimators": "90", "max_depth": "12"}
+{"radar": "KSGF", "n_estimators": "90", "max_depth": "19"}
+{"radar": "KSHV", "n_estimators": "40", "max_depth": "11"}
+{"radar": "KSJT", "n_estimators": "100", "max_depth": "19"}
+{"radar": "KSOX", "n_estimators": "80", "max_depth": "14"}
+{"radar": "KSRX", "n_estimators": "40", "max_depth": "14"}
+{"radar": "KTBW", "n_estimators": "90", "max_depth": "18"}
+{"radar": "KTFX", "n_estimators": "90", "max_depth": "18"}
+{"radar": "KTLH", "n_estimators": "30", "max_depth": "17"}
+{"radar": "KTLX", "n_estimators": "100", "max_depth": "13"}
+{"radar": "KTWX", "n_estimators": "100", "max_depth": "17"}
+{"radar": "KTYX", "n_estimators": "80", "max_depth": "16"}
+{"radar": "KUDX", "n_estimators": "60", "max_depth": "13"}
+{"radar": "KUEX", "n_estimators": "70", "max_depth": "19"}
+{"radar": "KVNX", "n_estimators": "50", "max_depth": "13"}
+{"radar": "KVTX", "n_estimators": "60", "max_depth": "13"}
+{"radar": "KVWX", "n_estimators": "30", "max_depth": "11"}
+{"radar": "KYUX", "n_estimators": "90", "max_depth": "12"}
