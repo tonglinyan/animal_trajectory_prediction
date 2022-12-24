@@ -2,20 +2,21 @@
 The goal of this project is to predict the trajectory of ants and spring migration of birds, by leveraging ARIMA models and Random Forest Regression on sequential datasets.
 
 ## Ant
-The goal of this part is to predict the number of chamber where ants stay with ARIMA method.
 
 ### Dataset
 To get the dataset of ant, download the compressed file `data_ant` and decompress it. There's a further explaination of dataset in the `data_ant`.
 
 #### Data processing
 
-For the ants, there's no missing data. We can get a complete data by combining all the individual ones with `ang_processing.ipynb`.
+without missing data, we get a complete data by combining all the individual one with `ang_processing.ipynb`.
 
 ### Modeling and Forecasting
 
-	`ant_forecasting_arima.ipynb` predicts the number of chamber directly.
-	`ant_location_forecasting.ipynb` predicts the location of ant, and transfers the location to the number of chamber.
-	`ant_evaluation.ipynb` computes the accuracy, recall, precision and f1-score.
+`ant_forecasting_arima.ipynb` predicts the number of chamber directly.
+
+`ant_location_forecasting.ipynb` predicts the location of ant, and transfers the location to the number of chamber.
+
+`ant_forecasting_evaluation.ipynb` evaluates the performance by accuracy, recall, precision and f1-score.
 
 
 ## Bird
